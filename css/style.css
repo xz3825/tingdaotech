@@ -357,9 +357,12 @@ a {
   overflow: hidden;
 }
 
-.tech-figure img {
+.tech-figure img,
+.tech-figure video {
   width: 100%;
   border-radius: 1px;
+  display: block;
+  background: #fff;
 }
 
 .tech-figure figcaption {
