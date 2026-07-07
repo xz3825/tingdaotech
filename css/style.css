@@ -378,10 +378,25 @@ a {
 }
 
 .tech-figure figcaption {
-  margin-top: 12px;
-  font-size: 0.8rem;
-  color: var(--text-light);
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
   text-align: center;
+  line-height: 1.6;
+}
+
+.tech-figure figcaption strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.tech-figure figcaption span {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--text-light);
 }
 
 .tech-block.full-width .tech-block-inner {
@@ -396,12 +411,12 @@ a {
 
 /* 大图区块：文字在上，图在下 */
 .tech-block-feature .container {
-  max-width: 1280px;
+  max-width: 1480px;
 }
 
 .tech-block-feature .tech-block-inner {
   grid-template-columns: 1fr;
-  gap: 36px;
+  gap: 32px;
   align-items: stretch;
 }
 
@@ -412,8 +427,10 @@ a {
 }
 
 .tech-block-feature .tech-figure {
-  padding: 20px 24px 24px;
+  padding: 12px 0 20px;
   max-width: 100%;
+  border: none;
+  background: transparent;
 }
 
 .tech-block-feature .tech-figure video,
