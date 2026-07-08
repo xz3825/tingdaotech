@@ -3,193 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Tingdao Lab - 清醒态个性化音频神经调控研究">
   <title>Tingdao Lab | 听道科技</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
-  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="header">
+    <div class="header__inner">
       <a href="index.html" class="logo">
-        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" class="logo-img" width="160" height="40">
+        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" width="160" height="40">
       </a>
-      <button class="menu-toggle" aria-label="打开菜单">
-        <span></span><span></span><span></span>
-      </button>
-      <nav>
-        <ul class="nav-list">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="technology.html">Tingdao Technology</a></li>
-          <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <button class="menu-btn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+      <ul class="nav">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="technology.html">Tingdao Technology</a></li>
+        <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
     </div>
   </header>
 
   <main>
-    <!-- Split hero -->
-    <section class="split-hero">
-      <div class="split-hero-media">
-        <div class="split-hero-media-inner atmosphere" aria-hidden="true"></div>
-      </div>
-      <div class="split-hero-content">
-        <p class="hero-label reveal-fade">TINGDAO LAB</p>
-        <h1 class="reveal-title">听道实验室</h1>
-        <p class="reveal-fade">研究白天清醒状态下，个性化音频刺激如何影响大脑节律与心理功能——覆盖冥想、情绪、睡眠与记忆四个方向。</p>
-        <div class="scroll-hint reveal-fade">Scroll Down</div>
+    <section class="page-hero">
+      <div class="container">
+        <p class="section-label">Tingdao Lab</p>
+        <h1>听道实验室</h1>
+        <p>研究白天清醒状态下，个性化音频刺激如何影响大脑节律与心理功能——覆盖冥想、情绪、睡眠与记忆四个方向。</p>
       </div>
     </section>
 
-    <!-- 实验室介绍 — 左右分栏 -->
+    <!-- 实验室介绍 -->
     <section class="section">
       <div class="container">
-        <div class="split-panel reveal" data-split-panel>
-          <div class="split-panel-pane split-panel-text" data-panel="left" role="button" tabindex="0" aria-label="点击放大说明">
-            <div class="split-panel-text-inner">
-              <p class="section-label">About the Lab</p>
-              <h2>让声音不只是被听见，也能被科学地测量</h2>
-              <p><strong>语言信息处理与言语康复应用工业和信息化部重点实验室</strong>共建单位——江苏听道科技有限公司深耕神经科学与人工智能的交叉领域，作为非侵入式脑机接口的科技先锋，致力于将前沿神经科学技术转化为普惠大众的健康解决方案，持续引领个性化脑波同步听觉调控技术的工业化浪潮。</p>
-              <p>Tingdao Lab 是听道科技的核心研究平台。通过 EEG、ERP、行为任务和心理量表，我们从神经活动、主观体验和行为表现三个层面，系统评估音频干预的效果。</p>
-              <p>不同于单纯播放固定音乐，我们关注声音与大脑状态之间的动态互动——基于个体脑电特征，观察 alpha、theta 等关键节律在音频刺激前后的变化。</p>
-              <p class="split-panel-caption">什么是脑波相位？同样的声音，出现在不同相位，可能引发不同强度的神经响应。</p>
-            </div>
-            <span class="split-panel-tag">说明 · Text</span>
+        <div class="lab-intro">
+          <div>
+            <span class="lab-badge">共建单位</span>
+            <h2>让声音不只是被听见，也能被科学地测量</h2>
+            <p><strong>语言信息处理与言语康复应用工业和信息化部重点实验室</strong>共建单位——江苏听道科技有限公司深耕神经科学与人工智能的交叉领域，作为非侵入式脑机接口的科技先锋，致力于将前沿神经科学技术转化为普惠大众的健康解决方案，持续引领个性化脑波同步听觉调控技术的工业化浪潮。</p>
+            <p>Tingdao Lab 是听道科技的核心研究平台。通过 EEG、ERP、行为任务和心理量表，我们从神经活动、主观体验和行为表现三个层面，系统评估音频干预的效果。</p>
+            <p>不同于单纯播放固定音乐，我们关注声音与大脑状态之间的动态互动——基于个体脑电特征，观察 alpha、theta 等关键节律在音频刺激前后的变化。</p>
+            <p>什么是脑波相位？同样的声音，出现在不同相位，可能引发不同强度的神经响应。</p>
           </div>
-          <div class="split-panel-pane split-panel-media" data-panel="right" role="button" tabindex="0" aria-label="点击放大视频">
-            <video autoplay loop muted playsinline preload="auto" aria-label="脑波相位研究">
-              <source src="assets/tech-brainwave-phase.mp4" type="video/mp4">
-              <img src="assets/tech-brainwave-phase.gif" alt="脑波相位研究">
-            </video>
-            <span class="split-panel-tag">视频 · Video</span>
-          </div>
+          <figure class="lab-media">
+            <img src="assets/tech-brainwave-phase.gif" alt="脑波相位研究示意">
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- 研究方向 — dual column -->
     <section class="section section-alt">
       <div class="container">
-        <div class="section-header center">
-          <p class="section-label reveal-fade">Research Directions</p>
-          <h2 class="reveal-title">研究方向</h2>
+        <div class="section-head">
+          <p class="section-label">Research Directions</p>
+          <h2>研究方向</h2>
         </div>
-
-        <div class="dual-column" style="margin-bottom:64px">
-          <div class="dual-column-item">
-            <svg class="dual-column-icon reveal-fade" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
-              <ellipse cx="32" cy="28" rx="18" ry="20"/>
-              <path d="M14 28c0-8 8-14 18-14s18 6 18 14"/>
-              <path d="M22 52h20M24 58h16"/>
-              <path d="M42 22l6-3M42 34l6 3"/>
-            </svg>
-            <h3 class="reveal-title">Meditation · 冥想</h3>
-            <p class="reveal-fade">通过个性化音频引导个体进入更稳定的注意与觉察状态，结合 alpha/theta 活动和 state mindfulness 量表，评估声音对冥想体验的支持作用。</p>
+        <div class="research-grid">
+          <div class="research-card">
+            <h3>Meditation · 冥想</h3>
+            <p>通过个性化音频引导个体进入更稳定的注意与觉察状态，结合 alpha/theta 活动和 state mindfulness 量表，评估声音对冥想体验的支持作用。</p>
           </div>
-          <div class="dual-column-divider" aria-hidden="true"></div>
-          <div class="dual-column-item">
-            <svg class="dual-column-icon reveal-fade" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
-              <ellipse cx="32" cy="28" rx="18" ry="20"/>
-              <path d="M14 28c0-8 8-14 18-14s18 6 18 14"/>
-              <path d="M22 52h20M24 58h16"/>
-              <path d="M18 24c2-4 6-6 10-4M34 20c4-2 8 0 10 4"/>
-            </svg>
-            <h3 class="reveal-title">Emotion · 情绪</h3>
-            <p class="reveal-fade">使用情绪图片、情绪评分与 ERP 指标，观察音频是否影响负性情绪反应、情绪稳定性和持续性情绪加工。</p>
+          <div class="research-card">
+            <h3>Emotion · 情绪</h3>
+            <p>使用情绪图片、情绪评分与 ERP 指标，观察音频是否影响负性情绪反应、情绪稳定性和持续性情绪加工。</p>
           </div>
-        </div>
-
-        <div class="dual-column">
-          <div class="dual-column-item">
-            <svg class="dual-column-icon reveal-fade" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
-              <ellipse cx="32" cy="28" rx="18" ry="20"/>
-              <path d="M14 28c0-8 8-14 18-14s18 6 18 14"/>
-              <path d="M22 52h20M24 58h16"/>
-              <path d="M28 18l-2-6M36 18l2-6"/>
-            </svg>
-            <h3 class="reveal-title">Sleep · 睡眠</h3>
-            <p class="reveal-fade">评估音频对放松、困倦和入睡相关脑电节律的影响，区分真正的放松调节与单纯困倦效应。</p>
+          <div class="research-card">
+            <h3>Sleep · 睡眠</h3>
+            <p>评估音频对放松、困倦和入睡相关脑电节律的影响，区分真正的放松调节与单纯困倦效应。</p>
           </div>
-          <div class="dual-column-divider" aria-hidden="true"></div>
-          <div class="dual-column-item">
-            <svg class="dual-column-icon reveal-fade" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.2">
-              <ellipse cx="32" cy="28" rx="18" ry="20"/>
-              <path d="M14 28c0-8 8-14 18-14s18 6 18 14"/>
-              <path d="M22 52h20M24 58h16"/>
-              <path d="M24 32h16M28 38h8"/>
-            </svg>
-            <h3 class="reveal-title">Memory · 记忆</h3>
-            <p class="reveal-fade">通过注意与记忆任务，研究音频是否影响信息编码、工作记忆和回忆表现，并结合 theta 活动与 P300 指标进行验证。</p>
+          <div class="research-card">
+            <h3>Memory · 记忆</h3>
+            <p>通过注意与记忆任务，研究音频是否影响信息编码、工作记忆和回忆表现，并结合 theta 活动与 P300 指标进行验证。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 研究方法 — dark cards -->
     <section class="section">
-      <div class="container">
-        <div class="section-header center">
-          <p class="section-label reveal-fade">Methodology</p>
-          <h2 class="reveal-title">我们如何开展研究</h2>
+      <div class="container container-narrow">
+        <div class="section-head">
+          <p class="section-label">Collaboration</p>
+          <h2>开放合作</h2>
         </div>
-        <div class="dark-cards reveal-stagger">
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M24 6v6M24 36v6M6 24h6M36 24h6"/>
-                <circle cx="24" cy="24" r="10"/>
-                <path d="M20 24h8M24 20v8"/>
-              </svg>
-              <h3>多模态数据采集</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>同步记录 EEG 脑电信号、ERP 事件相关电位、行为任务表现与心理量表评分，从神经、行为与主观体验三个层面全面评估干预效果。</p>
-          </div>
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 36l8-12 8 8 12-16"/>
-                <rect x="8" y="8" width="32" height="32" rx="4"/>
-              </svg>
-              <h3>个体化刺激范式</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>基于每位被试的脑电特征定制音频刺激参数，观察 alpha、theta 等关键节律在刺激前后的动态变化，而非使用统一的固定音频。</p>
-          </div>
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M16 24h16M24 16v16"/>
-                <rect x="10" y="10" width="28" height="28" rx="6"/>
-              </svg>
-              <h3>严格对照设计</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>采用匹配音频对照组与盲法实验设计，区分个性化闭环机制的特异性效应与声音本身的一般性放松效应，确保研究结论的可信度。</p>
-          </div>
+        <div class="prose">
+          <p>欢迎高校、医院及神经科学研究机构就音频神经调控研究开展合作。如有意向，请通过 <a href="index.html#contact" style="color:var(--royal);text-decoration:underline">Contact</a> 页面与我们联系。</p>
         </div>
-      </div>
-    </section>
-
-    <!-- 合作 CTA -->
-    <section class="section section-alt">
-      <div class="container container-narrow cta-block">
-        <p class="section-label reveal-fade">Collaboration</p>
-        <h2 class="reveal-title">开放合作</h2>
-        <p class="reveal-fade">欢迎高校、医院及神经科学研究机构就音频神经调控研究开展合作。如有意向，请通过 Contact 页面与我们联系。</p>
-        <a href="index.html#contact" class="btn btn-primary reveal-fade">联系我们</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <p>&copy; 2026 江苏听道脑机接口公司</p>
       <p>TINGDAO Brain-Computer Interface Technology</p>

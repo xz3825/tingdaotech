@@ -3,48 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="江苏听道脑机接口公司 - 专注节律神经调控与脑机接口技术研发">
   <title>听道科技 | 江苏听道脑机接口公司</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
-  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="page-home">
+<body>
 
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="header">
+    <div class="header__inner">
       <a href="index.html" class="logo">
-        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" class="logo-img" width="160" height="40">
+        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" width="160" height="40">
       </a>
-      <button class="menu-toggle" aria-label="打开菜单">
-        <span></span><span></span><span></span>
-      </button>
-      <nav>
-        <ul class="nav-list">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="technology.html">Tingdao Technology</a></li>
-          <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <button class="menu-btn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+      <ul class="nav">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="technology.html">Tingdao Technology</a></li>
+        <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
   </header>
 
   <main>
-    <section class="page-hero page-hero-video">
-      <video class="hero-video" autoplay loop muted playsinline preload="auto" aria-hidden="true" poster="assets/color-flow.png">
-        <source src="assets/colorflow-animation.mp4?v=2" type="video/mp4">
+    <!-- 首页 Hero：视频背景 + 文字悬浮 -->
+    <section class="hero">
+      <video class="hero__video" autoplay muted loop playsinline poster="assets/color-flow.png">
+        <source src="assets/colorflow-animation.mp4" type="video/mp4">
       </video>
-      <div class="hero-video-overlay" aria-hidden="true"></div>
-      <div class="container hero-content">
-        <p class="hero-label reveal-fade">Brain-Computer Interface</p>
-        <h1 class="reveal-title">理解大脑节律，<br>连接神经与未来</h1>
-        <p class="reveal-fade">江苏听道脑机接口公司专注于非侵入式脑电信号分析与节律神经调控技术，探索从开环刺激到闭环反馈的个体化神经干预路径。</p>
-        <div class="hero-actions reveal-fade">
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__label">Brain-Computer Interface</p>
+        <h1>理解大脑节律，<br>连接神经与未来</h1>
+        <p>江苏听道脑机接口公司专注于非侵入式脑电信号分析与节律神经调控技术，探索从开环刺激到闭环反馈的个体化神经干预路径。</p>
+        <div class="hero__actions">
           <a href="technology.html" class="btn btn-primary">Tingdao Technology</a>
           <a href="tingdao-lab.html" class="btn btn-outline">Tingdao Lab</a>
         </div>
@@ -52,31 +46,33 @@
     </section>
 
     <section class="section section-alt">
-      <div class="container container-narrow about-block">
-        <div class="section-header center">
+      <div class="container container-narrow">
+        <div class="section-head">
           <p class="section-label">About</p>
           <h2>公司介绍</h2>
         </div>
-        <p>江苏听道脑机接口公司立足神经科学与工程技术的交叉领域，以脑电节律分析为核心，研究脑波频率、相位与同步模式对神经状态的反映，并探索相位敏感性刺激与闭环神经调控在实际场景中的应用。</p>
-        <p>我们相信，未来的脑机技术不应只存在于实验室，也可以成为温和、可理解、可持续使用的日常支持工具——帮助用户更好地理解自己的大脑状态，并建立与自身节律更协调的生活方式。</p>
+        <div class="prose">
+          <p>江苏听道脑机接口公司立足神经科学与工程技术的交叉领域，以脑电节律分析为核心，研究脑波频率、相位与同步模式对神经状态的反映，并探索相位敏感性刺激与闭环神经调控在实际场景中的应用。</p>
+          <p>我们相信，未来的脑机技术不应只存在于实验室，也可以成为温和、可理解、可持续使用的日常支持工具——帮助用户更好地理解自己的大脑状态，并建立与自身节律更协调的生活方式。</p>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="section-header center">
+        <div class="section-head">
           <p class="section-label">Explore</p>
           <h2>深入了解我们的方向</h2>
         </div>
-        <div class="cards-grid">
-          <a href="technology.html" class="link-card">
+        <div class="cards">
+          <a href="technology.html" class="card-link">
             <h3>Tingdao Technology</h3>
             <p>个性化脑波同步听觉调控——从开环到闭环，从实验室到可穿戴产品。</p>
             <span class="arrow">了解更多 →</span>
           </a>
-          <a href="tingdao-lab.html" class="link-card">
+          <a href="tingdao-lab.html" class="card-link">
             <h3>Tingdao Lab</h3>
-            <p>清醒态个性化音频干预——覆盖冥想、情绪、睡眠与记忆四个方向，从 EEG、ERP 与行为层面系统评估效果。</p>
+            <p>清醒态个性化音频干预——覆盖冥想、情绪、睡眠与记忆四个方向。</p>
             <span class="arrow">了解更多 →</span>
           </a>
         </div>
@@ -85,7 +81,7 @@
 
     <section id="contact" class="section section-alt">
       <div class="container">
-        <div class="section-header">
+        <div class="section-head">
           <p class="section-label">Contact</p>
           <h2>联系我们</h2>
           <p>欢迎学术交流、合作洽谈或技术咨询。</p>
@@ -105,7 +101,7 @@
               <p>contact@tingdaotech.com（待更新）</p>
             </div>
           </div>
-          <div class="contact-form">
+          <div>
             <div id="form-success" class="form-success">感谢您的留言，我们会尽快与您联系。</div>
             <form id="contact-form">
               <div class="form-row">
@@ -130,7 +126,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <p>&copy; 2026 江苏听道脑机接口公司</p>
       <p>TINGDAO Brain-Computer Interface Technology</p>

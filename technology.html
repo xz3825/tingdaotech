@@ -3,237 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Tingdao Technology - 个性化脑波同步听觉调控，闭环听觉神经调控">
   <title>Tingdao Technology | 听道科技</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.loli.net" crossorigin>
-  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
+  <header class="header">
+    <div class="header__inner">
       <a href="index.html" class="logo">
-        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" class="logo-img" width="160" height="40">
+        <img src="assets/logo-header.png" alt="听道科技 TINGTAO" width="160" height="40">
       </a>
-      <button class="menu-toggle" aria-label="打开菜单">
-        <span></span><span></span><span></span>
-      </button>
-      <nav>
-        <ul class="nav-list">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="technology.html">Tingdao Technology</a></li>
-          <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <button class="menu-btn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+      <ul class="nav">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="technology.html">Tingdao Technology</a></li>
+        <li><a href="tingdao-lab.html">Tingdao Lab</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
     </div>
   </header>
 
   <main>
-    <!-- Split hero -->
-    <section class="split-hero">
-      <div class="split-hero-media">
-        <div class="split-hero-media-inner">
-          <video autoplay loop muted playsinline preload="auto" aria-label="开环与闭环系统">
-            <source src="assets/tech-open-closed-loop.mp4" type="video/mp4">
-            <img src="assets/tech-open-closed-loop.gif" alt="开环与闭环系统">
-          </video>
-        </div>
-      </div>
-      <div class="split-hero-content">
-        <p class="hero-label reveal-fade">TINGDAO TECHNOLOGY</p>
-        <h1 class="reveal-title">科技</h1>
-        <p class="reveal-fade">核心技术：个性化脑波同步听觉调控——通过可穿戴设备实时采集脑电，动态调整音频节奏与呈现时机，使声音刺激与大脑自身的节律同步呼应。</p>
-        <div class="scroll-hint reveal-fade">Scroll Down</div>
+    <section class="page-hero">
+      <div class="container">
+        <p class="section-label">Tingdao Technology</p>
+        <h1>科技</h1>
+        <p>核心技术：个性化脑波同步听觉调控——通过可穿戴设备实时采集脑电，动态调整音频节奏与呈现时机，使声音刺激与大脑自身的节律同步呼应。</p>
       </div>
     </section>
 
-    <!-- 核心技术介绍 -->
     <section class="section">
       <div class="container container-narrow">
-        <div class="section-header">
-          <p class="section-label reveal-fade">核心技术 · Core Technology</p>
-          <h2 class="reveal-title">个性化脑波同步听觉调控</h2>
+        <div class="section-head">
+          <p class="section-label">Core Technology</p>
+          <h2>个性化脑波同步听觉调控</h2>
         </div>
-        <div class="about-block reveal">
+        <div class="prose">
           <p>传统的助眠、冥想音频多采用固定频率或预设曲目，属于<strong>「开环」</strong>播放——声音的内容与节奏不会随您当下的大脑状态而变化。</p>
-          <p>听道科技的核心路线是<strong>闭环听觉神经调控</strong>（Closed-Loop Auditory Stimulation, CLAS）：通过可穿戴设备实时采集脑电信号，识别 alpha、theta 等关键频段的相位特征，并据此动态调整音频的音色、节奏与呈现时机，使声音刺激与大脑自身的节律同步呼应。</p>
-          <p>这一路径借鉴了国际学界在闭环听觉刺激领域的研究积累——包括图宾根大学团队在慢波睡眠记忆巩固方面的经典工作，以及萨里大学、帝国理工学院团队近年来在清醒态 alpha 振荡相位依赖调制方面的进展。</p>
+          <p>听道科技的核心路线是<strong>闭环听觉神经调控</strong>（Closed-Loop Auditory Stimulation, CLAS）：通过可穿戴设备实时采集脑电信号，识别 alpha、theta 等关键频段的相位特征，并据此动态调整音频的音色、节奏与呈现时机。</p>
         </div>
       </div>
     </section>
 
-    <!-- 开环 vs 闭环 -->
-    <section class="editorial-block section-alt">
+    <!-- Science 部分：五个动图 -->
+    <section class="section section-alt">
       <div class="container">
-        <div class="editorial-block-inner">
-          <figure class="editorial-media reveal">
-            <video autoplay loop muted playsinline preload="auto" aria-label="开环与闭环系统的本质区别">
-              <source src="assets/tech-open-closed-loop.mp4" type="video/mp4">
-              <img src="assets/tech-open-closed-loop.gif" alt="开环与闭环系统的本质区别">
-            </video>
-            <figcaption>开环系统按预设播放；闭环系统实时感知脑电并在关键窗口触发刺激</figcaption>
-          </figure>
-          <div class="editorial-text">
-            <p class="editorial-label reveal-fade">From Open-Loop to Closed-Loop</p>
-            <h2 class="reveal-title">从开环到闭环：声音如何与脑波对话</h2>
-            <p class="reveal-fade">开环音频按预设计划播放，不读取用户脑电——如同定时浇花，无论植物是否需要。闭环系统则实时感知脑波，在关键相位窗口触发刺激——如同智能浇花，只在最需要的时候行动。</p>
-            <p class="reveal-fade">我们的目标，是让听觉干预从「单向输出」走向「双向对话」：不是把声音推给用户，而是让声音跟随用户此刻的神经节律。</p>
-          </div>
+        <div class="section-head">
+          <p class="section-label">Science</p>
+          <h2>科学原理</h2>
+          <p>从脑波相位到闭环调控，五个核心概念的可视化说明。</p>
         </div>
-      </div>
-    </section>
 
-    <!-- 脑波相位 -->
-    <section class="section">
-      <div class="container">
-        <div class="split-panel reveal" data-split-panel>
-          <div class="split-panel-pane split-panel-media" data-panel="left" role="button" tabindex="0" aria-label="点击放大视频">
-            <video autoplay loop muted playsinline preload="auto" aria-label="什么是脑波相位">
-              <source src="assets/tech-brainwave-phase.mp4" type="video/mp4">
+        <div class="science-list">
+
+          <article class="science-item">
+            <figure class="science-media">
               <img src="assets/tech-brainwave-phase.gif" alt="什么是脑波相位">
-            </video>
-            <span class="split-panel-tag">视频 · Video</span>
-          </div>
-          <div class="split-panel-pane split-panel-text" data-panel="right" role="button" tabindex="0" aria-label="点击放大说明">
-            <div class="split-panel-text-inner">
-              <p class="editorial-label">What Is Brainwave Phase</p>
-              <h2>什么是脑波相位</h2>
-              <p>大脑电活动像海浪一样起伏。一个周期内既有波峰也有波谷——「当前处于波的哪个位置」就是相位（Phase）。同样的声音，出现在不同相位，可能引发不同强度的神经响应。</p>
-              <p class="split-panel-caption">波峰对应神经元最兴奋，波谷对应最抑制；相位决定刺激的最佳时机。</p>
+            </figure>
+            <div class="science-text">
+              <h3>什么是脑波相位</h3>
+              <p>大脑的电活动像海浪一样起伏。一个「周期」内既有波峰，也有波谷——这个「现在处于波的哪个位置」就叫相位（Phase）。</p>
+              <p>波峰对应神经元最兴奋，波谷对应最抑制；相位决定刺激的最佳时机。</p>
             </div>
-            <span class="split-panel-tag">说明 · Text</span>
-          </div>
-        </div>
-      </div>
-    </section>
+          </article>
 
-    <!-- 相位敏感性 -->
-    <section class="editorial-block section-alt">
-      <div class="container">
-        <div class="editorial-block-inner">
-          <figure class="editorial-media reveal">
-            <video autoplay loop muted playsinline preload="auto" aria-label="相位锁定刺激与神经响应">
-              <source src="assets/tech-phase-response.mp4" type="video/mp4">
-              <img src="assets/tech-phase-response.gif" alt="相位锁定刺激与神经响应">
-            </video>
-            <figcaption>同样的声音，不同相位时引起不同强度的神经响应（ERP）</figcaption>
-          </figure>
-          <div class="editorial-text">
-            <p class="editorial-label reveal-fade">Phase Matters</p>
-            <h2 class="reveal-title">相位决定效果：时机也是信号的一部分</h2>
-            <p class="reveal-fade">在波峰时刻播放刺激，神经响应可能放大 15–25%——这就是「相位锁定」的科学依据。我们持续优化相位识别与触发算法，使音频干预更精准地落在个体脑电节律的关键窗口。</p>
-          </div>
-        </div>
-      </div>
-    </section>
+          <article class="science-item reverse">
+            <figure class="science-media">
+              <img src="assets/tech-phase-response.gif" alt="同样的声音，不同相位时引起不同强度的神经响应">
+            </figure>
+            <div class="science-text">
+              <h3>相位决定神经响应强度</h3>
+              <p>同样的声音，不同相位时引起不同强度的神经响应。在波峰时播放，神经响应可能放大 15–25%。</p>
+              <p>这就是「相位锁定」的科学依据——时机也是信号的一部分。</p>
+            </div>
+          </article>
 
-    <!-- 非侵入路径 -->
-    <section class="editorial-block">
-      <div class="container">
-        <div class="editorial-block-inner reverse">
-          <figure class="editorial-media reveal">
-            <video autoplay loop muted playsinline preload="auto" aria-label="不同神经调控技术时空分辨率及便携性分布图">
-              <source src="assets/tech-resolution-chart.mp4" type="video/mp4">
+          <article class="science-item">
+            <figure class="science-media">
+              <img src="assets/tech-open-closed-loop.gif" alt="开环与闭环系统的本质区别">
+            </figure>
+            <div class="science-text">
+              <h3>「开环」vs「闭环」的本质区别</h3>
+              <p>开环系统按预设计划播放，不读取用户脑波——如同定时浇花器，无论植物是否需要。</p>
+              <p>闭环系统实时读取脑波，仅在波峰时刻触发声音——如同智能浇花器，只在最有效时刻行动。</p>
+            </div>
+          </article>
+
+          <article class="science-item reverse">
+            <figure class="science-media">
               <img src="assets/tech-resolution-chart.gif" alt="不同神经调控技术时空分辨率及便携性分布图">
-            </video>
-            <figcaption>不同神经调控手段在时间分辨率、空间分辨率与便携性上的分布对比</figcaption>
-          </figure>
-          <div class="editorial-text">
-            <p class="editorial-label reveal-fade">Understanding the Brain Through Rhythms</p>
-            <h2 class="reveal-title">非侵入、可穿戴的技术路径</h2>
-            <p class="reveal-fade">在时空分辨率与便携性之间，听道选择了非侵入式 EEG 与听觉刺激的结合——无需专业设备与临床场景，即可在居家环境中实现个体化神经调控。</p>
-          </div>
-        </div>
-      </div>
-    </section>
+            </figure>
+            <div class="science-text">
+              <h3>非侵入、可穿戴的技术路径</h3>
+              <p>不同神经调控手段在时间分辨率、空间分辨率与便携性上各有取舍。</p>
+              <p>听道选择了非侵入式 EEG 与听觉刺激的结合——无需专业设备与临床场景，即可在居家环境中实现个体化神经调控。</p>
+            </div>
+          </article>
 
-    <!-- 五维靶向 -->
-    <section class="editorial-block section-alt">
-      <div class="container">
-        <div class="editorial-block-inner">
-          <figure class="editorial-media reveal">
-            <video autoplay loop muted playsinline preload="auto" aria-label="五位联合靶向模型">
-              <source src="assets/tech-multi-target.mp4" type="video/mp4">
+          <article class="science-item">
+            <figure class="science-media">
               <img src="assets/tech-multi-target.gif" alt="五位联合靶向模型">
-            </video>
-            <figcaption>从脑电节律、相位、生理反馈、行为表现到个体差异的多维联合分析框架</figcaption>
-          </figure>
-          <div class="editorial-text">
-            <p class="editorial-label reveal-fade">Multi-Target Model</p>
-            <h2 class="reveal-title">五位联合靶向：多维度理解神经状态</h2>
-            <p class="reveal-fade">认知与情绪状态并非单一指标所能概括。我们从五个维度联合理解与调节：</p>
-            <ul class="target-list reveal-fade">
-              <li><strong>脑电节律</strong> — 反映当前神经活动模式</li>
-              <li><strong>相位信息</strong> — 决定刺激的最佳时机</li>
-              <li><strong>生理反馈</strong> — 提供身体层面的状态线索</li>
-              <li><strong>行为表现</strong> — 反映任务中的实际变化</li>
-              <li><strong>个体差异</strong> — 决定最适合每个人的调控参数</li>
-            </ul>
-          </div>
+            </figure>
+            <div class="science-text">
+              <h3>五位联合靶向模型</h3>
+              <p>认知与情绪状态并非单一指标所能概括。我们从脑电节律、相位信息、生理反馈、行为表现与个体差异五个维度联合理解与调节。</p>
+              <p>从脑电节律、相位、生理反馈、行为表现到个体差异的多维联合分析框架。</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- 验证体系 — dark cards -->
     <section class="section">
-      <div class="container">
-        <div class="section-header center">
-          <p class="section-label reveal-fade">验证体系 · Validation</p>
-          <h2 class="reveal-title">我们如何验证这项技术</h2>
-          <p class="reveal-fade">神经调控从实验室走向产品，每一步都需要严谨验证。</p>
-        </div>
-        <div class="dark-cards reveal-stagger">
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="24" cy="24" r="18"/>
-                <path d="M24 14v10l6 4"/>
-              </svg>
-              <h3>锁相精度验证</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>持续测试设备实时捕捉目标脑电相位的准确度，确保音频响应真正跟随个体脑电节律，而非泛化的固定模式。</p>
-          </div>
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M24 8c-8 0-14 6-14 14s6 14 14 14 14-6 14-14-6-14-14-14z"/>
-                <path d="M24 20v8M20 24h8"/>
-              </svg>
-              <h3>个体化校准</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>每位用户的脑电振荡频率存在个体差异。系统在使用前进行个体化频率校准，而非套用统一参数。</p>
-          </div>
-          <div class="dark-card">
-            <div class="dark-card-header">
-              <svg class="dark-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="10" y="14" width="28" height="22" rx="3"/>
-                <path d="M18 22h12M18 28h8"/>
-              </svg>
-              <h3>对照实验设计</h3>
-            </div>
-            <hr class="dark-card-divider">
-            <p>与科研机构合作，采用严格对照设计（含匹配音频对照组），区分「闭环机制的特异性效应」与「声音本身的一般性放松效应」，确保效果有据可查。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 技术定位 -->
-    <section class="section section-alt tech-intro">
       <div class="container container-narrow">
-        <div class="section-header">
-          <p class="section-label reveal-fade">技术定位 · Our Approach</p>
-          <h2 class="reveal-title">我们的技术定位</h2>
+        <div class="section-head">
+          <p class="section-label">Our Approach</p>
+          <h2>我们的技术定位</h2>
         </div>
-        <div class="about-block reveal">
+        <div class="prose">
           <p>听道科技选择<strong>非侵入式、可穿戴</strong>的技术路径。不同于需要专业设备与操作人员参与的经颅磁刺激等临床神经调控手段，我们致力于将以神经科学为基础的调节工具，以安全、便捷、可居家使用的方式带给更多人。</p>
           <p>我们相信，基于脑波同步的听觉调控，不应只停留在实验室——它可以成为日常可理解、可测量、可持续使用的神经健康支持方式。</p>
         </div>
@@ -241,7 +133,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <p>&copy; 2026 江苏听道脑机接口公司</p>
       <p>TINGDAO Brain-Computer Interface Technology</p>
