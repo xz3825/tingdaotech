@@ -130,6 +130,33 @@ a {
   margin: 4px 0;
 }
 
+/* 首页：导航栏完全透明 */
+.page-home .header {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.page-home .nav a {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.page-home .nav a:hover,
+.page-home .nav a.is-active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.page-home .menu-btn {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.page-home .menu-btn span {
+  background: #ffffff;
+}
+
 /* ── Homepage Hero ── */
 .hero {
   position: relative;
@@ -604,6 +631,23 @@ a {
 
   .nav.is-open {
     display: flex;
+  }
+
+  .page-home .nav.is-open {
+    background: rgba(4, 18, 70, 0.85);
+    border-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .page-home .nav.is-open a {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .page-home .nav.is-open a:hover,
+  .page-home .nav.is-open a.is-active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
   }
 
   .nav a {
