@@ -49,7 +49,6 @@
       </div>
     </section>
 
-    <!-- Science 部分：五个动图 -->
     <section class="section section-alt">
       <div class="container">
         <div class="section-head">
@@ -60,9 +59,12 @@
 
         <div class="science-list">
 
+          <!-- 图一：动图 + 文字，无交互分栏 -->
           <article class="science-item">
             <figure class="science-media">
-              <img src="assets/tech-brainwave-phase.gif" alt="什么是脑波相位">
+              <video autoplay loop muted playsinline preload="auto" aria-label="什么是脑波相位">
+                <source src="assets/tech-brainwave-phase.mp4" type="video/mp4">
+              </video>
             </figure>
             <div class="science-text">
               <h3>什么是脑波相位</h3>
@@ -71,9 +73,12 @@
             </div>
           </article>
 
+          <!-- 图二：动图 + 文字（修复不显示） -->
           <article class="science-item reverse">
             <figure class="science-media">
-              <img src="assets/tech-phase-response.gif" alt="同样的声音，不同相位时引起不同强度的神经响应">
+              <video autoplay loop muted playsinline preload="auto" aria-label="相位锁定刺激与神经响应">
+                <source src="assets/tech-phase-response.mp4" type="video/mp4">
+              </video>
             </figure>
             <div class="science-text">
               <h3>相位决定神经响应强度</h3>
@@ -82,10 +87,8 @@
             </div>
           </article>
 
-          <article class="science-item">
-            <figure class="science-media">
-              <img src="assets/tech-open-closed-loop.gif" alt="开环与闭环系统的本质区别">
-            </figure>
+          <!-- 图三：无图片，标题居中 -->
+          <article class="science-item science-item--center">
             <div class="science-text">
               <h3>「开环」vs「闭环」的本质区别</h3>
               <p>开环系统按预设计划播放，不读取用户脑波——如同定时浇花器，无论植物是否需要。</p>
@@ -93,10 +96,8 @@
             </div>
           </article>
 
-          <article class="science-item reverse">
-            <figure class="science-media">
-              <img src="assets/tech-resolution-chart.gif" alt="不同神经调控技术时空分辨率及便携性分布图">
-            </figure>
+          <!-- 图四：无图片，标题居中 -->
+          <article class="science-item science-item--center">
             <div class="science-text">
               <h3>非侵入、可穿戴的技术路径</h3>
               <p>不同神经调控手段在时间分辨率、空间分辨率与便携性上各有取舍。</p>
@@ -104,10 +105,8 @@
             </div>
           </article>
 
-          <article class="science-item">
-            <figure class="science-media">
-              <img src="assets/tech-multi-target.gif" alt="五位联合靶向模型">
-            </figure>
+          <!-- 图五：无图片，纯文字 -->
+          <article class="science-item science-item--center">
             <div class="science-text">
               <h3>五位联合靶向模型</h3>
               <p>认知与情绪状态并非单一指标所能概括。我们从脑电节律、相位信息、生理反馈、行为表现与个体差异五个维度联合理解与调节。</p>

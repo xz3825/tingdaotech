@@ -324,6 +324,15 @@ a {
   margin: 0 auto;
 }
 
+.page-hero__partner {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 500;
+  color: var(--royal);
+  max-width: 720px;
+  margin: 0 auto 16px;
+  line-height: 1.6;
+}
+
 /* ── Science / GIF blocks ── */
 .science-list {
   display: flex;
@@ -354,9 +363,22 @@ a {
   box-shadow: 0 4px 24px rgba(4, 18, 70, 0.06);
 }
 
-.science-media img {
+.science-media video {
   width: 100%;
   height: auto;
+  display: block;
+  background: var(--white);
+}
+
+.science-item--center {
+  grid-template-columns: 1fr;
+  max-width: var(--narrow);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.science-item--center .science-text h3 {
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
 }
 
 .science-text h3 {
@@ -406,6 +428,19 @@ a {
 
 .lab-intro p:last-child {
   margin-bottom: 0;
+}
+
+.lab-intro--text {
+  grid-template-columns: 1fr;
+}
+
+.lab-intro--text .section-head {
+  margin-bottom: 32px;
+}
+
+.lab-intro-head .lab-badge {
+  display: inline-block;
+  margin-bottom: 16px;
 }
 
 .lab-media {
