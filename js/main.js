@@ -38,4 +38,23 @@
       }
     });
   }
+
+  /* Homepage: white nav over hero, dark nav over light sections */
+  var header = document.querySelector(".header");
+  var hero = document.querySelector(".hero");
+
+  if (header && hero && document.body.classList.contains("page-home")) {
+    function updateHeaderScroll() {
+      var threshold = hero.offsetHeight - 100;
+      if (window.scrollY > threshold) {
+        header.classList.add("header--solid");
+      } else {
+        header.classList.remove("header--solid");
+      }
+    }
+
+    updateHeaderScroll();
+    window.addEventListener("scroll", updateHeaderScroll, { passive: true });
+    window.addEventListener("resize", updateHeaderScroll);
+  }
 })();

@@ -130,32 +130,64 @@ a {
   margin: 4px 0;
 }
 
-/* 首页：导航栏完全透明 */
-.page-home .header {
+/* 透明导航栏（首页 / Tech / Lab） */
+.page-home .header,
+.page-inner .header {
   background: transparent;
   border-color: transparent;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-.page-home .nav a {
+/* 首页 Hero 上：白字 */
+.page-home .header .nav a {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.page-home .nav a:hover,
-.page-home .nav a.is-active {
+.page-home .header .nav a:hover,
+.page-home .header .nav a.is-active {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.12);
 }
 
-.page-home .menu-btn {
+.page-home .header .menu-btn {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.page-home .menu-btn span {
+.page-home .header .menu-btn span {
   background: #ffffff;
 }
+
+/* 首页滚到浅色区域：玻璃底 + 深色字 */
+.page-home .header.header--solid {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.08);
+}
+
+.page-home .header.header--solid .nav a {
+  color: var(--muted);
+}
+
+.page-home .header.header--solid .nav a:hover,
+.page-home .header.header--solid .nav a.is-active {
+  color: var(--text);
+  background: rgba(4, 18, 70, 0.06);
+}
+
+.page-home .header.header--solid .menu-btn {
+  border-color: var(--border);
+}
+
+.page-home .header.header--solid .menu-btn span {
+  background: var(--text);
+}
+
+/* Tech / Lab：透明底 + 深色字（沿用默认 .nav a 颜色） */
 
 /* ── Homepage Hero ── */
 .hero {
@@ -633,19 +665,19 @@ a {
     display: flex;
   }
 
-  .page-home .nav.is-open {
+  .page-home .header:not(.header--solid) .nav.is-open {
     background: rgba(4, 18, 70, 0.85);
     border-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
 
-  .page-home .nav.is-open a {
+  .page-home .header:not(.header--solid) .nav.is-open a {
     color: rgba(255, 255, 255, 0.88);
   }
 
-  .page-home .nav.is-open a:hover,
-  .page-home .nav.is-open a.is-active {
+  .page-home .header:not(.header--solid) .nav.is-open a:hover,
+  .page-home .header:not(.header--solid) .nav.is-open a.is-active {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.12);
   }
