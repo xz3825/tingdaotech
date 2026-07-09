@@ -11,6 +11,7 @@
 :root {
   --bg: #ffffff;
   --bg-gray: #eef1f4;
+  --bg-blue: #e2eef3;
   --bg-dark: #0c0c0e;
   --white: #ffffff;
   --black: #0c0c0e;
@@ -140,35 +141,8 @@ a {
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
 }
 
-/* Tech / Lab：黑底 hero 上轻毛玻璃 + 白字；滚到白区后切深色字 */
-.page-inner .header:not(.header--solid) {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: none;
-}
-
-.page-inner .header:not(.header--solid) .nav a {
-  color: rgba(255, 255, 255, 0.88);
-  transition: color 0.3s ease, background 0.2s ease;
-}
-
-.page-inner .header:not(.header--solid) .nav a:hover,
-.page-inner .header:not(.header--solid) .nav a.is-active {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.page-inner .header:not(.header--solid) .menu-btn {
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
-.page-inner .header:not(.header--solid) .menu-btn span {
-  background: #ffffff;
-}
-
-.page-inner .header.header--solid {
+/* Tech / Lab：浅色页，导航始终深色字 */
+.page-inner .header {
   background: rgba(255, 255, 255, 0.72);
   border-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
@@ -176,21 +150,22 @@ a {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
-.page-inner .header.header--solid .nav a {
+.page-inner .header .nav a {
   color: var(--muted);
+  transition: color 0.3s ease, background 0.2s ease;
 }
 
-.page-inner .header.header--solid .nav a:hover,
-.page-inner .header.header--solid .nav a.is-active {
+.page-inner .header .nav a:hover,
+.page-inner .header .nav a.is-active {
   color: var(--text);
   background: rgba(0, 0, 0, 0.06);
 }
 
-.page-inner .header.header--solid .menu-btn {
+.page-inner .header .menu-btn {
   border-color: var(--border);
 }
 
-.page-inner .header.header--solid .menu-btn span {
+.page-inner .header .menu-btn span {
   background: var(--text);
 }
 
@@ -419,6 +394,11 @@ a {
   color: var(--text);
 }
 
+.section--blue {
+  background: var(--bg-blue);
+  color: var(--text);
+}
+
 .section--dark {
   background: var(--bg-dark);
   color: #ffffff;
@@ -580,23 +560,23 @@ a {
 .page-hero {
   padding: calc(var(--header-h) + 64px) 0 56px;
   text-align: center;
-  background: var(--bg-dark);
-  color: #ffffff;
+  background: var(--bg-blue);
+  color: var(--text);
 }
 
 .page-hero .section-label {
-  color: rgba(120, 190, 210, 0.9);
+  color: var(--accent);
 }
 
 .page-hero h1 {
   font-family: var(--serif);
   font-size: clamp(2rem, 4.5vw, 2.8rem);
   margin-bottom: 16px;
-  color: #ffffff;
+  color: var(--text);
 }
 
 .page-hero p {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -604,7 +584,7 @@ a {
 .page-hero__partner {
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 500;
-  color: rgba(120, 190, 210, 0.95);
+  color: var(--accent);
   max-width: 720px;
   margin: 0 auto 16px;
   line-height: 1.6;
@@ -819,10 +799,16 @@ a {
 .footer {
   padding: 40px 0;
   text-align: center;
+  background: var(--bg-gray);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.page-home .footer {
   background: var(--bg-dark);
   border-top: none;
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.85rem;
 }
 
 .footer p + p {
@@ -883,8 +869,7 @@ a {
     display: flex;
   }
 
-  .page-home .header:not(.header--solid) .nav.is-open,
-  .page-inner .header:not(.header--solid) .nav.is-open {
+  .page-home .header:not(.header--solid) .nav.is-open {
     background: rgba(0, 0, 0, 0.88);
     border-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
@@ -892,20 +877,17 @@ a {
   }
 
   .page-home .header.header--solid .nav.is-open,
-  .page-inner .header.header--solid .nav.is-open {
+  .page-inner .nav.is-open {
     background: rgba(255, 255, 255, 0.95);
     border-color: var(--border);
   }
 
-  .page-home .header:not(.header--solid) .nav.is-open a,
-  .page-inner .header:not(.header--solid) .nav.is-open a {
+  .page-home .header:not(.header--solid) .nav.is-open a {
     color: rgba(255, 255, 255, 0.88);
   }
 
   .page-home .header:not(.header--solid) .nav.is-open a:hover,
-  .page-home .header:not(.header--solid) .nav.is-open a.is-active,
-  .page-inner .header:not(.header--solid) .nav.is-open a:hover,
-  .page-inner .header:not(.header--solid) .nav.is-open a.is-active {
+  .page-home .header:not(.header--solid) .nav.is-open a.is-active {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.12);
   }

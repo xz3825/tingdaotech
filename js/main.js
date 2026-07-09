@@ -39,11 +39,11 @@
     });
   }
 
-  /* Nav: light over dark hero, dark over light sections */
+  /* Homepage only: light nav over dark hero, dark nav over light sections */
   var header = document.querySelector(".header");
-  var hero = document.querySelector(".hero") || document.querySelector(".page-hero");
+  var hero = document.querySelector(".hero");
 
-  if (header && hero) {
+  if (header && hero && document.body.classList.contains("page-home")) {
     function updateHeaderScroll() {
       var threshold = hero.offsetHeight * 0.55;
       if (window.scrollY > threshold) {
