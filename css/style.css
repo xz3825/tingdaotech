@@ -9,15 +9,19 @@
 }
 
 :root {
-  --bg: #e6eaee;
-  --bg-alt: #ccdee2;
+  --bg: #ffffff;
+  --bg-gray: #eef1f4;
+  --bg-dark: #0c0c0e;
   --white: #ffffff;
-  --navy: #041246;
-  --royal: #07187c;
-  --text: #041246;
-  --muted: rgba(4, 18, 70, 0.72);
-  --light: rgba(4, 18, 70, 0.48);
-  --border: rgba(4, 18, 70, 0.12);
+  --black: #0c0c0e;
+  --navy: #0a1628;
+  --accent: #1a6b8a;
+  --accent-hover: #145a75;
+  --royal: #1a6b8a;
+  --text: #12151a;
+  --muted: rgba(18, 21, 26, 0.68);
+  --light: rgba(18, 21, 26, 0.45);
+  --border: rgba(18, 21, 26, 0.1);
   --max: 1120px;
   --narrow: 720px;
   --header-h: 72px;
@@ -75,7 +79,7 @@ a {
   border-radius: 999px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .header__inner {
@@ -110,7 +114,7 @@ a {
 .nav a:hover,
 .nav a.is-active {
   color: var(--text);
-  background: rgba(4, 18, 70, 0.06);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .menu-btn {
@@ -136,24 +140,58 @@ a {
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
 }
 
-/* Tech / Lab：50% 毛玻璃 + 深色字 */
-.page-inner .header {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.06);
+/* Tech / Lab：黑底 hero 上轻毛玻璃 + 白字；滚到白区后切深色字 */
+.page-inner .header:not(.header--solid) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: none;
 }
 
-.page-inner .header .nav a {
-  color: var(--muted);
+.page-inner .header:not(.header--solid) .nav a {
+  color: rgba(255, 255, 255, 0.88);
   transition: color 0.3s ease, background 0.2s ease;
 }
 
-.page-inner .header .nav a:hover,
-.page-inner .header .nav a.is-active {
+.page-inner .header:not(.header--solid) .nav a:hover,
+.page-inner .header:not(.header--solid) .nav a.is-active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.page-inner .header:not(.header--solid) .menu-btn {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.page-inner .header:not(.header--solid) .menu-btn span {
+  background: #ffffff;
+}
+
+.page-inner .header.header--solid {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.page-inner .header.header--solid .nav a {
+  color: var(--muted);
+}
+
+.page-inner .header.header--solid .nav a:hover,
+.page-inner .header.header--solid .nav a.is-active {
   color: var(--text);
-  background: rgba(4, 18, 70, 0.06);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.page-inner .header.header--solid .menu-btn {
+  border-color: var(--border);
+}
+
+.page-inner .header.header--solid .menu-btn span {
+  background: var(--text);
 }
 
 /* 首页 Hero 上：轻毛玻璃 + 白字 */
@@ -184,13 +222,13 @@ a {
   background: #ffffff;
 }
 
-/* 首页滚到浅色区域：50% 毛玻璃 + 深色字 */
+/* 首页滚到浅色区域：白毛玻璃 + 深色字 */
 .page-home .header.header--solid {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .page-home .header.header--solid .nav a {
@@ -200,7 +238,7 @@ a {
 .page-home .header.header--solid .nav a:hover,
 .page-home .header.header--solid .nav a.is-active {
   color: var(--text);
-  background: rgba(4, 18, 70, 0.06);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .page-home .header.header--solid .menu-btn {
@@ -268,7 +306,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(120, 190, 210, 0.95);
   margin-bottom: 16px;
   animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
@@ -280,7 +318,6 @@ a {
   line-height: 1.2;
   color: #ffffff;
   margin-bottom: 20px;
-  text-shadow: 0 2px 28px rgba(4, 18, 70, 0.35);
   animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
 
@@ -288,7 +325,6 @@ a {
   font-size: clamp(1rem, 2.2vw, 1.1rem);
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 32px;
-  text-shadow: 0 1px 16px rgba(4, 18, 70, 0.28);
   animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
 }
 
@@ -307,6 +343,18 @@ a {
   .hero__actions {
     animation: none;
   }
+}
+
+.hero__actions .btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.hero__actions .btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #ffffff;
 }
 
 .hero__actions .btn-outline {
@@ -334,16 +382,16 @@ a {
 }
 
 .btn-primary {
-  background: var(--royal);
+  background: var(--accent);
   color: var(--white);
 }
 
 .btn-primary:hover {
-  background: var(--navy);
+  background: var(--accent-hover);
 }
 
 .btn-outline {
-  background: var(--white);
+  background: transparent;
   color: var(--navy);
   border-color: var(--navy);
 }
@@ -356,10 +404,110 @@ a {
 /* ── Sections ── */
 .section {
   padding: 80px 0;
+  background: var(--bg);
+  color: var(--text);
 }
 
-.section-alt {
-  background: var(--bg-alt);
+.section-alt,
+.section--light {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.section--gray {
+  background: var(--bg-gray);
+  color: var(--text);
+}
+
+.section--dark {
+  background: var(--bg-dark);
+  color: #ffffff;
+}
+
+.section--dark .section-head h2,
+.section--dark .section-head p,
+.section--dark .section-label,
+.section--dark .prose p,
+.section--dark .prose strong,
+.section--dark .contact-item h4,
+.section--dark .contact-item p,
+.section--dark .science-text h3,
+.section--dark .science-text p,
+.section--dark .lab-intro h2,
+.section--dark .lab-intro p,
+.section--dark .form-group label {
+  color: inherit;
+}
+
+.section--dark .section-label,
+.section--dark .contact-item h4 {
+  color: rgba(120, 190, 210, 0.85);
+}
+
+.section--dark .section-head p,
+.section--dark .prose p,
+.section--dark .science-text p,
+.section--dark .lab-intro p,
+.section--dark .contact-item p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.section--dark .prose strong {
+  color: #ffffff;
+}
+
+.section--dark .card-link,
+.section--dark .research-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.section--dark .card-link:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border-color: rgba(120, 190, 210, 0.35);
+}
+
+.section--dark .card-link p,
+.section--dark .research-card p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.section--dark .card-link .arrow {
+  color: rgba(120, 190, 210, 0.95);
+}
+
+.section--dark .science-media,
+.section--dark .lab-media {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.section--dark .form-group input,
+.section--dark .form-group textarea {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.section--dark .form-group input::placeholder,
+.section--dark .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.section--dark .btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.section--dark .btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.section--dark .form-success {
+  background: rgba(26, 107, 138, 0.25);
+  color: rgba(180, 220, 235, 0.95);
 }
 
 .section-head {
@@ -384,7 +532,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--light);
+  color: var(--accent);
   margin-bottom: 12px;
 }
 
@@ -401,12 +549,13 @@ a {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
 }
 
 .card-link:hover {
-  box-shadow: 0 8px 32px rgba(4, 18, 70, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
+  border-color: rgba(26, 107, 138, 0.35);
 }
 
 .card-link h3 {
@@ -423,7 +572,7 @@ a {
 
 .card-link .arrow {
   font-size: 0.85rem;
-  color: var(--royal);
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -431,17 +580,23 @@ a {
 .page-hero {
   padding: calc(var(--header-h) + 64px) 0 56px;
   text-align: center;
-  background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+  background: var(--bg-dark);
+  color: #ffffff;
+}
+
+.page-hero .section-label {
+  color: rgba(120, 190, 210, 0.9);
 }
 
 .page-hero h1 {
   font-family: var(--serif);
   font-size: clamp(2rem, 4.5vw, 2.8rem);
   margin-bottom: 16px;
+  color: #ffffff;
 }
 
 .page-hero p {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.72);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -449,7 +604,7 @@ a {
 .page-hero__partner {
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 500;
-  color: var(--royal);
+  color: rgba(120, 190, 210, 0.95);
   max-width: 720px;
   margin: 0 auto 16px;
   line-height: 1.6;
@@ -478,11 +633,11 @@ a {
 }
 
 .science-media {
-  background: var(--white);
+  background: var(--bg-gray);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 }
 
 .science-media video {
@@ -529,8 +684,8 @@ a {
 .lab-badge {
   display: inline-block;
   padding: 6px 14px;
-  background: rgba(7, 24, 124, 0.08);
-  color: var(--royal);
+  background: rgba(26, 107, 138, 0.1);
+  color: var(--accent);
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: 999px;
@@ -616,7 +771,7 @@ a {
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--light);
+  color: var(--accent);
   margin-bottom: 6px;
 }
 
@@ -654,8 +809,8 @@ a {
 .form-success {
   display: none;
   padding: 16px;
-  background: rgba(7, 24, 124, 0.08);
-  color: var(--royal);
+  background: rgba(26, 107, 138, 0.1);
+  color: var(--accent);
   border-radius: 10px;
   margin-bottom: 16px;
 }
@@ -664,8 +819,9 @@ a {
 .footer {
   padding: 40px 0;
   text-align: center;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
+  background: var(--bg-dark);
+  border-top: none;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
 }
 
@@ -685,6 +841,16 @@ a {
 
 .prose strong {
   color: var(--text);
+}
+
+.text-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.section--dark .text-link {
+  color: rgba(120, 190, 210, 0.95);
 }
 
 /* ── Mobile ── */
@@ -710,37 +876,36 @@ a {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 12px;
-    box-shadow: 0 8px 32px rgba(4, 18, 70, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
 
   .nav.is-open {
     display: flex;
   }
 
-  .page-home .header:not(.header--solid) .nav.is-open {
-    background: rgba(4, 18, 70, 0.82);
+  .page-home .header:not(.header--solid) .nav.is-open,
+  .page-inner .header:not(.header--solid) .nav.is-open {
+    background: rgba(0, 0, 0, 0.88);
     border-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
 
-  .page-home .header.header--solid .nav.is-open {
+  .page-home .header.header--solid .nav.is-open,
+  .page-inner .header.header--solid .nav.is-open {
     background: rgba(255, 255, 255, 0.95);
     border-color: var(--border);
   }
 
-  .page-inner .nav.is-open {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  .page-home .header:not(.header--solid) .nav.is-open a {
+  .page-home .header:not(.header--solid) .nav.is-open a,
+  .page-inner .header:not(.header--solid) .nav.is-open a {
     color: rgba(255, 255, 255, 0.88);
   }
 
   .page-home .header:not(.header--solid) .nav.is-open a:hover,
-  .page-home .header:not(.header--solid) .nav.is-open a.is-active {
+  .page-home .header:not(.header--solid) .nav.is-open a.is-active,
+  .page-inner .header:not(.header--solid) .nav.is-open a:hover,
+  .page-inner .header:not(.header--solid) .nav.is-open a.is-active {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.12);
   }
