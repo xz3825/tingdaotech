@@ -222,16 +222,17 @@ a {
   overflow: hidden;
   padding: calc(var(--header-h) + 40px) 24px 64px;
   text-align: center;
+  background: #000000;
 }
 
-.hero__video {
+.hero__canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
   z-index: 0;
+  display: block;
+  background: #000000;
   pointer-events: none;
 }
 
@@ -240,6 +241,9 @@ a {
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 38% at 50% 42%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.12) 75%, rgba(0, 0, 0, 0.28) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, transparent 28%, transparent 82%, rgba(0, 0, 0, 0.25) 100%);
 }
 
 .hero__content {

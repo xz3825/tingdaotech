@@ -28,11 +28,9 @@
   </header>
 
   <main>
-    <!-- 首页 Hero：视频背景 + 文字悬浮 -->
+    <!-- 首页 Hero：Three.js 神经信号粒子波形背景 -->
     <section class="hero">
-      <video class="hero__video" autoplay muted loop playsinline poster="assets/color-flow.png">
-        <source src="assets/colorflow-animation.mp4?v=5" type="video/mp4">
-      </video>
+      <canvas id="neural-canvas" class="hero__canvas" aria-hidden="true"></canvas>
       <div class="hero__overlay" aria-hidden="true"></div>
       <div class="hero__content">
         <p class="hero__label">Brain-Computer Interface</p>
@@ -133,6 +131,8 @@
     </div>
   </footer>
 
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/neural-particles.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
