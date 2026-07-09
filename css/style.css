@@ -130,42 +130,66 @@ a {
   margin: 4px 0;
 }
 
-/* 透明导航栏（首页 / Tech / Lab） */
+/* 透明 / 毛玻璃导航栏 */
 .page-home .header,
 .page-inner .header {
-  background: transparent;
-  border-color: transparent;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* Tech / Lab：50% 毛玻璃 + 深色字 */
+.page-inner .header {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(4, 18, 70, 0.06);
+}
+
+.page-inner .header .nav a {
+  color: var(--muted);
+  transition: color 0.3s ease, background 0.2s ease;
+}
+
+.page-inner .header .nav a:hover,
+.page-inner .header .nav a.is-active {
+  color: var(--text);
+  background: rgba(4, 18, 70, 0.06);
+}
+
+/* 首页 Hero 上：轻毛玻璃 + 白字 */
+.page-home .header:not(.header--solid) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-/* 首页 Hero 上：白字 */
-.page-home .header .nav a {
-  color: rgba(255, 255, 255, 0.82);
+.page-home .header:not(.header--solid) .nav a {
+  color: rgba(255, 255, 255, 0.88);
+  transition: color 0.35s ease, background 0.2s ease;
 }
 
-.page-home .header .nav a:hover,
-.page-home .header .nav a.is-active {
+.page-home .header:not(.header--solid) .nav a:hover,
+.page-home .header:not(.header--solid) .nav a.is-active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
 }
 
-.page-home .header .menu-btn {
-  border-color: rgba(255, 255, 255, 0.4);
+.page-home .header:not(.header--solid) .menu-btn {
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
-.page-home .header .menu-btn span {
+.page-home .header:not(.header--solid) .menu-btn span {
   background: #ffffff;
 }
 
-/* 首页滚到浅色区域：玻璃底 + 深色字 */
+/* 首页滚到浅色区域：50% 毛玻璃 + 深色字 */
 .page-home .header.header--solid {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: var(--border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 4px 24px rgba(4, 18, 70, 0.08);
 }
 
@@ -186,8 +210,6 @@ a {
 .page-home .header.header--solid .menu-btn span {
   background: var(--text);
 }
-
-/* Tech / Lab：透明底 + 深色字（沿用默认 .nav a 颜色） */
 
 /* ── Homepage Hero ── */
 .hero {
@@ -227,12 +249,24 @@ a {
   width: 100%;
 }
 
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero__label {
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 16px;
+  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
 .hero h1 {
@@ -242,12 +276,33 @@ a {
   line-height: 1.2;
   color: #ffffff;
   margin-bottom: 20px;
+  text-shadow: 0 2px 28px rgba(4, 18, 70, 0.35);
+  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
 
 .hero p {
   font-size: clamp(1rem, 2.2vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 32px;
+  text-shadow: 0 1px 16px rgba(4, 18, 70, 0.28);
+  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__label,
+  .hero h1,
+  .hero p,
+  .hero__actions {
+    animation: none;
+  }
 }
 
 .hero__actions .btn-outline {
@@ -260,13 +315,6 @@ a {
   background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
   border-color: #ffffff;
-}
-
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
 }
 
 /* ── Buttons ── */
@@ -666,10 +714,21 @@ a {
   }
 
   .page-home .header:not(.header--solid) .nav.is-open {
-    background: rgba(4, 18, 70, 0.85);
+    background: rgba(4, 18, 70, 0.82);
     border-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .page-home .header.header--solid .nav.is-open {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--border);
+  }
+
+  .page-inner .nav.is-open {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   .page-home .header:not(.header--solid) .nav.is-open a {
