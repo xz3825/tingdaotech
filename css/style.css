@@ -255,8 +255,8 @@ a {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 50% 38% at 50% 42%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.12) 75%, rgba(0, 0, 0, 0.28) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, transparent 28%, transparent 82%, rgba(0, 0, 0, 0.25) 100%);
+    radial-gradient(ellipse 48% 42% at 50% 45%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.08) 45%, rgba(0, 0, 0, 0.35) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 22%, transparent 68%, rgba(0, 0, 0, 0.55) 100%);
 }
 
 .hero__content {
@@ -495,6 +495,16 @@ a {
   margin-bottom: 48px;
 }
 
+.section-head--solo {
+  margin-bottom: 0;
+}
+
+.section-head--solo h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  line-height: 1.45;
+}
+
 .section-head h2 {
   font-family: var(--serif);
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
@@ -506,6 +516,20 @@ a {
   color: var(--muted);
   max-width: 560px;
   margin: 0 auto;
+}
+
+.cards--apps {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cards--apps .card-link {
+  cursor: default;
+}
+
+.cards--apps .card-link:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
 }
 
 .section-label {
@@ -898,6 +922,7 @@ a {
   }
 
   .cards,
+  .cards--apps,
   .science-item,
   .lab-intro,
   .contact-grid,

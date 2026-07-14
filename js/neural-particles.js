@@ -1,6 +1,6 @@
 /**
- * Neural glowing particle waveform — black background.
- * Clear pinprick particles on filaments + cyan EEG wave + orange stimulus bursts.
+ * Dynamic 3D brain hero — black background.
+ * Layered transparent brain art + parallax + glowing particle filaments.
  */
 (function () {
   "use strict";
@@ -19,9 +19,10 @@
 
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x000000);
+  scene.fog = new THREE.FogExp2(0x000000, 0.018);
 
-  var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-  camera.position.z = 11;
+  var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 0.15, 9.2);
 
   var renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -35,6 +36,115 @@
   var mouse = new THREE.Vector2(0, 0);
   var mouseTarget = new THREE.Vector2(0, 0);
 
+  /* ── Soft radial glow behind brain ── */
+  function makeGlowTexture() {
+    var size = 256;
+    var c = document.createElement("canvas");
+    c.width = size;
+    c.height = size;
+    var ctx = c.getContext("2d");
+    var g = ctx.createRadialGradient(
+      size / 2,
+      size / 2,
+      0,
+      size / 2,
+      size / 2,
+      size / 2
+    );
+    g.addColorStop(0, "rgba(80, 160, 255, 0.55)");
+    g.addColorStop(0.25, "rgba(180, 80, 255, 0.22)");
+    g.addColorStop(0.55, "rgba(255, 120, 60, 0.1)");
+    g.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    var tex = new THREE.CanvasTexture(c);
+    tex.needsUpdate = true;
+    return tex;
+  }
+
+  var glowMat = new THREE.MeshBasicMaterial({
+    map: makeGlowTexture(),
+    transparent: true,
+    opacity: 0.7,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  var glow = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), glowMat);
+  glow.position.z = -1.6;
+  scene.add(glow);
+
+  /* ── Brain group (layered for depth) ── */
+  var brainGroup = new THREE.Group();
+  brainGroup.position.set(0, 0.05, 0);
+  scene.add(brainGroup);
+
+  var loader = new THREE.TextureLoader();
+  var brainUrl = "assets/brain-hero-square.png";
+
+  function makeBrainLayer(texture, scale, z, opacity, tint) {
+    var aspect = texture.image
+      ? texture.image.width / Math.max(texture.image.height, 1)
+      : 2;
+    var h = scale;
+    var w = scale * aspect;
+    var mat = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      opacity: opacity,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      color: tint || 0xffffff,
+    });
+    var mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+    mesh.position.z = z;
+    return mesh;
+  }
+
+  var layers = [];
+  var brainReady = false;
+
+  loader.load(
+    brainUrl,
+    function (tex) {
+      tex.colorSpace = THREE.SRGBColorSpace || THREE.sRGBEncoding;
+      tex.minFilter = THREE.LinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+      var baseScale = isMobile ? 5.6 : 6.8;
+
+      /* Back soft duplicate — depth / bloom feel */
+      var back = makeBrainLayer(tex, baseScale * 1.06, -0.55, 0.28, 0x88aaff);
+      back.material.blending = THREE.AdditiveBlending;
+      brainGroup.add(back);
+      layers.push({ mesh: back, parallax: 0.35, floatAmp: 0.04 });
+
+      /* Mid glow plate */
+      var mid = makeBrainLayer(tex, baseScale * 1.02, -0.22, 0.45, 0xffccaa);
+      mid.material.blending = THREE.AdditiveBlending;
+      brainGroup.add(mid);
+      layers.push({ mesh: mid, parallax: 0.55, floatAmp: 0.06 });
+
+      /* Main sharp brain */
+      var main = makeBrainLayer(tex, baseScale, 0, 1, 0xffffff);
+      brainGroup.add(main);
+      layers.push({ mesh: main, parallax: 0.85, floatAmp: 0.08 });
+
+      /* Front highlight fringe */
+      var front = makeBrainLayer(tex, baseScale * 0.98, 0.28, 0.22, 0xaaddff);
+      front.material.blending = THREE.AdditiveBlending;
+      brainGroup.add(front);
+      layers.push({ mesh: front, parallax: 1.15, floatAmp: 0.1 });
+
+      brainReady = true;
+    },
+    undefined,
+    function () {
+      console.error("[neural] Failed to load brain image:", brainUrl);
+    }
+  );
+
+  /* ── Orbiting colorful filaments (particles) ── */
   function hash(n) {
     var x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
     return x - Math.floor(x);
@@ -54,82 +164,33 @@
     return a + (b - a) * ux + (c - a) * uy * (1 - ux) + (d - b) * ux * uy;
   }
 
-  var COL = {
-    blue: new THREE.Color(0x3d8cff),
-    cyan: new THREE.Color(0x4ecfff),
-    teal: new THREE.Color(0x2ee6c5),
-    indigo: new THREE.Color(0x6b5dff),
-    violet: new THREE.Color(0x8b5cf6),
-    purple: new THREE.Color(0xa04dff),
-    magenta: new THREE.Color(0xd44dff),
-    pink: new THREE.Color(0xff5cb0),
-    coral: new THREE.Color(0xff6b6b),
-    orange: new THREE.Color(0xff6a2a),
-    hot: new THREE.Color(0xff3d6e),
-    gold: new THREE.Color(0xffb347),
-  };
-
-  var PALETTES = [
-    [COL.blue, COL.cyan, COL.teal, COL.indigo],
-    [COL.indigo, COL.violet, COL.purple, COL.magenta],
-    [COL.purple, COL.magenta, COL.pink, COL.hot],
-    [COL.cyan, COL.blue, COL.violet, COL.purple],
-    [COL.magenta, COL.pink, COL.coral, COL.orange],
-    [COL.violet, COL.purple, COL.orange, COL.gold],
+  var COLS = [
+    new THREE.Color(0x3d8cff),
+    new THREE.Color(0x4ecfff),
+    new THREE.Color(0x2ee6c5),
+    new THREE.Color(0x8b5cf6),
+    new THREE.Color(0xd44dff),
+    new THREE.Color(0xff5cb0),
+    new THREE.Color(0xff6a2a),
+    new THREE.Color(0xffb347),
   ];
 
-  function filamentColor(t, seed) {
-    var c = new THREE.Color();
-    var palette = PALETTES[Math.floor(seed * 6) % PALETTES.length];
-    var phase = (t * 0.95 + seed * 0.37) % 1;
-    var seg = 1 / (palette.length - 1);
-    var i = Math.min(palette.length - 2, Math.floor(phase / seg));
-    var local = (phase - i * seg) / seg;
-    c.copy(palette[i]).lerp(palette[i + 1], local);
-    return c;
-  }
-
-  var FILAMENT_COUNT = prefersReduced ? 14 : isMobile ? 24 : 34;
-  var PTS_PER = prefersReduced ? 75 : isMobile ? 100 : 130;
-  var WAVE_STRANDS = 11;
-  var WAVE_PTS = prefersReduced ? 480 : isMobile ? 720 : 1000;
-  var HOTSPOT_COUNT = prefersReduced ? 2 : 3;
-  var HOTSPOT_PTS = prefersReduced ? 140 : isMobile ? 200 : 280;
-  var DRIFT = prefersReduced ? 80 : isMobile ? 130 : 200;
-
-  var TOTAL =
-    FILAMENT_COUNT * PTS_PER +
-    WAVE_PTS +
-    HOTSPOT_COUNT * HOTSPOT_PTS +
-    DRIFT;
+  var FILAMENT_COUNT = prefersReduced ? 10 : isMobile ? 16 : 24;
+  var PTS_PER = prefersReduced ? 50 : isMobile ? 70 : 95;
+  var SPARK_COUNT = prefersReduced ? 80 : isMobile ? 140 : 220;
+  var TOTAL = FILAMENT_COUNT * PTS_PER + SPARK_COUNT;
 
   var filaments = [];
   for (var f = 0; f < FILAMENT_COUNT; f++) {
     filaments.push({
-      cx: (Math.random() - 0.5) * 17,
-      cy: (Math.random() - 0.5) * 8,
-      length: 4.5 + Math.random() * 10,
-      angle: Math.random() * Math.PI * 2,
-      curve: 0.55 + Math.random() * 1.55,
-      thickness: 0.018 + Math.random() * 0.045,
-      speed: 0.028 + Math.random() * 0.055,
+      radius: 2.2 + Math.random() * 2.8,
+      elev: (Math.random() - 0.5) * 1.8,
+      angle0: Math.random() * Math.PI * 2,
+      twist: 0.4 + Math.random() * 1.6,
+      speed: 0.08 + Math.random() * 0.18,
       seed: Math.random() * 100,
-      z: -0.8 + Math.random() * 2.0,
-      branch: f % 3 === 0 ? 0.28 + Math.random() * 0.4 : 0,
-    });
-  }
-
-  var hotspots = [];
-  for (var h = 0; h < HOTSPOT_COUNT; h++) {
-    hotspots.push({
-      x: (Math.random() - 0.5) * 10,
-      y: (Math.random() - 0.5) * 5,
-      z: (Math.random() - 0.5) * 2,
-      radius: 0.4 + Math.random() * 0.55,
-      phase: 0,
-      nextBurst: 1.2 + Math.random() * 2,
-      intensity: 0,
-      active: false,
+      colorIdx: f % COLS.length,
+      zBias: -0.4 + Math.random() * 1.6,
     });
   }
 
@@ -144,96 +205,51 @@
   var metaD = new Float32Array(TOTAL);
 
   var idx = 0;
-
   for (var fi = 0; fi < FILAMENT_COUNT; fi++) {
     var fil = filaments[fi];
     for (var p = 0; p < PTS_PER; p++) {
       var t = p / (PTS_PER - 1);
       kind[idx] = 0;
       metaA[idx] = fi;
-      metaB[idx] = t + Math.random() * 0.005;
+      metaB[idx] = t;
       metaC[idx] = (Math.random() - 0.5) * 2;
       metaD[idx] = 0.6 + Math.random() * 0.8;
 
-      var c = filamentColor(t, fil.seed * 0.01);
-      if (Math.random() > 0.93) c.copy(COL.orange).lerp(COL.gold, Math.random());
-
-      colors[idx * 3] = Math.min(1, c.r * 1.05);
-      colors[idx * 3 + 1] = Math.min(1, c.g * 1.05);
-      colors[idx * 3 + 2] = Math.min(1, c.b * 1.05);
-
-      sizes[idx] = Math.random() > 0.88 ? 3.0 + Math.random() * 1.5 : 1.7 + Math.random() * 1.2;
-      alphas[idx] = 0.52 + Math.random() * 0.35;
+      var c0 = COLS[fil.colorIdx].clone();
+      var c1 = COLS[(fil.colorIdx + 1) % COLS.length];
+      c0.lerp(c1, t);
+      colors[idx * 3] = c0.r;
+      colors[idx * 3 + 1] = c0.g;
+      colors[idx * 3 + 2] = c0.b;
+      sizes[idx] = 1.4 + Math.random() * 1.8;
+      alphas[idx] = 0.35 + Math.random() * 0.45;
       idx++;
     }
   }
 
-  for (var w = 0; w < WAVE_PTS; w++) {
+  for (var s = 0; s < SPARK_COUNT; s++) {
     kind[idx] = 1;
-    metaA[idx] = w / (WAVE_PTS - 1);
-    metaB[idx] = w % WAVE_STRANDS;
-    metaC[idx] = Math.random();
-    metaD[idx] = 0.8 + Math.random() * 0.4;
-
-    var wc = COL.cyan.clone().lerp(COL.blue, Math.random() * 0.25);
-    if (Math.random() > 0.95) wc.copy(COL.blue).lerp(COL.indigo, 0.25);
-    colors[idx * 3] = Math.min(1, wc.r * 1.15);
-    colors[idx * 3 + 1] = Math.min(1, wc.g * 1.15);
-    colors[idx * 3 + 2] = Math.min(1, wc.b * 1.1);
-    sizes[idx] = 3.0 + Math.random() * 2.0;
-    alphas[idx] = 0.9 + Math.random() * 0.1;
-    idx++;
-  }
-
-  for (var hi = 0; hi < HOTSPOT_COUNT; hi++) {
-    for (var hp = 0; hp < HOTSPOT_PTS; hp++) {
-      kind[idx] = 2;
-      metaA[idx] = hi;
-      metaB[idx] = Math.random() * Math.PI * 2;
-      metaC[idx] = Math.pow(Math.random(), 0.5);
-      metaD[idx] = 0.5 + Math.random() * 1.1;
-
-      var hc =
-        Math.random() < 0.55
-          ? COL.orange.clone().lerp(COL.gold, Math.random())
-          : COL.hot.clone().lerp(COL.orange, Math.random());
-      if (Math.random() > 0.88) hc.copy(COL.magenta).lerp(COL.hot, 0.5);
-
-      colors[idx * 3] = hc.r;
-      colors[idx * 3 + 1] = hc.g;
-      colors[idx * 3 + 2] = hc.b;
-      sizes[idx] = 2.0 + Math.random() * 1.6;
-      alphas[idx] = 0;
-      idx++;
-    }
-  }
-
-  for (var d = 0; d < DRIFT; d++) {
-    kind[idx] = 3;
     metaA[idx] = Math.random() * 1000;
-    metaB[idx] = (Math.random() - 0.5) * 22;
-    metaC[idx] = (Math.random() - 0.5) * 12;
-    metaD[idx] = (Math.random() - 0.5) * 4;
+    metaB[idx] = Math.random() * Math.PI * 2;
+    metaC[idx] = 1.5 + Math.random() * 3.5;
+    metaD[idx] = (Math.random() - 0.5) * 2.2;
 
-    var dc = filamentColor(Math.random(), Math.random());
-    colors[idx * 3] = dc.r * 0.75;
-    colors[idx * 3 + 1] = dc.g * 0.75;
-    colors[idx * 3 + 2] = dc.b * 0.75;
-    sizes[idx] = 1.2 + Math.random() * 1.0;
-    alphas[idx] = 0.18 + Math.random() * 0.22;
-    positions[idx * 3] = metaB[idx];
-    positions[idx * 3 + 1] = metaC[idx];
-    positions[idx * 3 + 2] = metaD[idx];
+    var sc = COLS[s % COLS.length];
+    colors[idx * 3] = sc.r;
+    colors[idx * 3 + 1] = sc.g;
+    colors[idx * 3 + 2] = sc.b;
+    sizes[idx] = 1.0 + Math.random() * 1.6;
+    alphas[idx] = 0.2 + Math.random() * 0.45;
     idx++;
   }
 
-  var geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
-  geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
-  geometry.setAttribute("aAlpha", new THREE.BufferAttribute(alphas, 1));
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  pGeo.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
+  pGeo.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+  pGeo.setAttribute("aAlpha", new THREE.BufferAttribute(alphas, 1));
 
-  var material = new THREE.ShaderMaterial({
+  var pMat = new THREE.ShaderMaterial({
     transparent: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
@@ -252,7 +268,7 @@
       "  vAlpha = aAlpha;",
       "  vec4 mv = modelViewMatrix * vec4(position, 1.0);",
       "  float dist = max(-mv.z, 0.5);",
-      "  gl_PointSize = max(2.0, aSize * uPixelRatio * (11.0 / dist));",
+      "  gl_PointSize = max(1.5, aSize * uPixelRatio * (10.0 / dist));",
       "  gl_Position = projectionMatrix * mv;",
       "}",
     ].join("\n"),
@@ -263,43 +279,19 @@
       "  vec2 uv = gl_PointCoord - vec2(0.5);",
       "  float d = length(uv);",
       "  if (d > 0.5) discard;",
-      "  float soft = 1.0 - smoothstep(0.1, 0.5, d);",
-      "  float core = 1.0 - smoothstep(0.0, 0.16, d);",
-      "  vec3 col = vColor * (1.05 + core * 0.95);",
-      "  gl_FragColor = vec4(col, soft * min(vAlpha * 1.12, 1.0));",
+      "  float soft = 1.0 - smoothstep(0.08, 0.5, d);",
+      "  float core = 1.0 - smoothstep(0.0, 0.15, d);",
+      "  vec3 col = vColor * (0.95 + core * 0.9);",
+      "  gl_FragColor = vec4(col, soft * vAlpha);",
       "}",
     ].join("\n"),
   });
 
-  var points = new THREE.Points(geometry, material);
-  scene.add(points);
+  var particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
 
-  var posAttr = geometry.getAttribute("position");
-  var alphaAttr = geometry.getAttribute("aAlpha");
-  var sizeAttr = geometry.getAttribute("aSize");
-
-  function sampleFilament(fil, t, time) {
-    var n1 = noise2(t * 3.0 + fil.seed, time * 0.07 + fil.seed * 0.1);
-    var n2 = noise2(t * 5.0 + fil.seed * 2, time * 0.1);
-    var n3 = noise2(fil.seed, t * 2.0 + time * 0.04);
-
-    var ang = fil.angle + (n1 - 0.5) * fil.curve;
-    var px = fil.cx + Math.cos(ang) * fil.length * (t - 0.5);
-    var py = fil.cy + Math.sin(ang) * fil.length * (t - 0.5);
-
-    px += Math.sin(t * Math.PI * 2 + fil.seed) * fil.curve * 0.9;
-    py += Math.cos(t * Math.PI * 1.5 + fil.seed * 1.3) * fil.curve * 0.7;
-    px += (n2 - 0.5) * 0.7;
-    py += (n3 - 0.5) * 0.7;
-
-    if (fil.branch > 0 && t > 0.45 && t < 0.85) {
-      var bt = (t - 0.45) / 0.4;
-      px += Math.sin(fil.angle + 1.1) * fil.branch * bt * fil.length * 0.35;
-      py += Math.cos(fil.angle + 1.1) * fil.branch * bt * fil.length * 0.35;
-    }
-
-    return { x: px, y: py, z: fil.z + (n1 - 0.5) * 0.5 };
-  }
+  var posAttr = pGeo.getAttribute("position");
+  var alphaAttr = pGeo.getAttribute("aAlpha");
 
   function resize() {
     var parent = canvas.parentElement || document.body;
@@ -314,17 +306,13 @@
     renderer.setSize(w, h, false);
     canvas.style.width = "100%";
     canvas.style.height = "100%";
-    material.uniforms.uPixelRatio.value = Math.min(
-      window.devicePixelRatio || 1,
-      2
-    );
+    pMat.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
   }
 
   resize();
   window.addEventListener("resize", resize);
-  /* Hero may layout after first paint */
   requestAnimationFrame(resize);
-  setTimeout(resize, 100);
+  setTimeout(resize, 120);
 
   function onPointerMove(e) {
     var rect = canvas.getBoundingClientRect();
@@ -342,7 +330,7 @@
 
   var clock = new THREE.Clock();
   var running = true;
-  var motionScale = prefersReduced ? 0.2 : 1;
+  var motionScale = prefersReduced ? 0.15 : 1;
 
   function animate() {
     if (!running) return;
@@ -353,119 +341,74 @@
 
     mouse.x += (mouseTarget.x - mouse.x) * 0.05;
     mouse.y += (mouseTarget.y - mouse.y) * 0.05;
-    var mx = mouse.x * 8;
-    var my = mouse.y * 4.5;
 
-    for (var hi = 0; hi < HOTSPOT_COUNT; hi++) {
-      var hs = hotspots[hi];
-      if (!hs.active && time >= hs.nextBurst && !prefersReduced) {
-        hs.active = true;
-        hs.intensity = 0;
-        hs.phase = 0;
-        hs.x = (Math.random() - 0.5) * 10 + mouse.x;
-        hs.y = (Math.random() - 0.5) * 4.5 + mouse.y * 0.8;
-        hs.z = (Math.random() - 0.5) * 2;
-        hs.radius = 0.4 + Math.random() * 0.55;
-      }
-      if (hs.active) {
-        hs.phase += dt;
-        if (hs.phase < 0.35) hs.intensity = hs.phase / 0.35;
-        else if (hs.phase < 1.4) hs.intensity = 1;
-        else if (hs.phase < 2.4) hs.intensity = 1 - (hs.phase - 1.4) / 1.0;
-        else {
-          hs.active = false;
-          hs.intensity = 0;
-          hs.nextBurst = time + 3 + Math.random() * 4;
-        }
+    /* Brain: slow yaw / pitch + float — stereoscopic feel */
+    if (brainReady) {
+      var rotY = Math.sin(time * 0.22 * motionScale) * 0.22 + mouse.x * 0.28;
+      var rotX = Math.sin(time * 0.17 * motionScale) * 0.08 + mouse.y * 0.16;
+      brainGroup.rotation.y = rotY;
+      brainGroup.rotation.x = rotX;
+      brainGroup.position.y = 0.05 + Math.sin(time * 0.55 * motionScale) * 0.12;
+      brainGroup.position.x = mouse.x * 0.15;
+
+      for (var li = 0; li < layers.length; li++) {
+        var L = layers[li];
+        var px = mouse.x * 0.35 * L.parallax;
+        var py = mouse.y * 0.25 * L.parallax;
+        L.mesh.position.x = px;
+        L.mesh.position.y =
+          py + Math.sin(time * 0.7 + li) * L.floatAmp * motionScale;
       }
     }
 
-    for (var fi = 0; fi < FILAMENT_COUNT; fi++) {
-      var fil = filaments[fi];
-      fil.cx += Math.sin(time * 0.06 + fil.seed) * 0.0016 * motionScale;
-      fil.cy += Math.cos(time * 0.045 + fil.seed * 1.4) * 0.001 * motionScale;
-      fil.angle += fil.speed * 0.01 * dt * 60 * motionScale;
-    }
+    /* Soft pulsing glow */
+    glow.material.opacity = 0.55 + Math.sin(time * 0.9) * 0.18;
+    glow.scale.setScalar(1 + Math.sin(time * 0.6) * 0.06);
+    glow.position.x = mouse.x * 0.4;
+    glow.position.y = mouse.y * 0.25;
 
+    /* Filaments orbit around brain */
     for (var i = 0; i < TOTAL; i++) {
       var ix = i * 3;
-      var k = kind[i];
-
-      if (k === 0) {
+      if (kind[i] === 0) {
         var fRef = filaments[metaA[i] | 0];
-        var tt = (metaB[i] + time * fRef.speed * 0.06 * motionScale) % 1;
-        var pos = sampleFilament(fRef, tt, time);
-        var jitter =
-          (noise2(tt * 18 + fRef.seed, metaC[i] * 3) - 0.5) *
-          fRef.thickness *
-          6 *
-          metaD[i];
-        pos.x += Math.cos(fRef.angle + 1.57) * jitter;
-        pos.y += Math.sin(fRef.angle + 1.57) * jitter;
-
-        var dx = pos.x - mx;
-        var dy = pos.y - my;
-        var d2 = dx * dx + dy * dy;
-        if (d2 < 14) {
-          var force = (1 - d2 / 14) * 0.2;
-          pos.x += -dy * force * 0.12;
-          pos.y += dx * force * 0.12;
-        }
-
-        positions[ix] = pos.x;
-        positions[ix + 1] = pos.y;
-        positions[ix + 2] = pos.z;
-        alphas[i] = (0.38 + Math.sin(tt * Math.PI) * 0.4) * (0.8 + 0.2 * metaD[i]);
-      } else if (k === 1) {
-        var u = metaA[i];
-        var strand = metaB[i];
-        var x = (u - 0.5) * 15.5;
-        var wave =
-          Math.sin(u * Math.PI * 3.5 + time * 1.3 + strand * 0.48) * 0.85 +
-          Math.sin(u * Math.PI * 6.5 + time * 1.9 + strand * 0.85) * 0.32 +
-          Math.sin(u * Math.PI * 2.0 + time * 0.5 + strand * 0.18) * 0.22;
-        var yOff = (strand - (WAVE_STRANDS - 1) / 2) * 0.072;
-
-        var mdx = x - mx;
-        var mdy = wave - my;
-        var md2 = mdx * mdx + mdy * mdy;
-        if (md2 < 12) wave += (1 - md2 / 12) * 0.35 * Math.sin(time * 4);
+        var tt = metaB[i];
+        var ang =
+          fRef.angle0 +
+          tt * Math.PI * 2 * fRef.twist +
+          time * fRef.speed * motionScale;
+        var n =
+          noise2(tt * 4 + fRef.seed, time * 0.15 + fRef.seed * 0.05) - 0.5;
+        var r = fRef.radius + n * 0.35 + Math.sin(tt * Math.PI * 3 + time) * 0.15;
+        var y =
+          fRef.elev +
+          Math.sin(ang * 1.5 + fRef.seed) * 0.55 +
+          n * 0.4 +
+          metaC[i] * 0.08;
+        var x = Math.cos(ang) * r;
+        var z = Math.sin(ang) * r * 0.55 + fRef.zBias;
 
         positions[ix] = x;
-        positions[ix + 1] = wave + yOff;
-        positions[ix + 2] = 0.6 + Math.sin(u * 5 + time * 0.7 + strand) * 0.25;
-        alphas[i] = (0.85 + 0.15 * Math.sin(u * Math.PI)) * metaD[i];
-        sizes[i] = 3.0 + metaC[i] * 1.4 + Math.abs(wave) * 0.15;
-      } else if (k === 2) {
-        var hRef = hotspots[metaA[i] | 0];
-        var ang = metaB[i] + time * metaD[i] * 0.28;
-        var spray = metaC[i] * hRef.radius * (0.8 + hRef.intensity * 1.1);
-        spray *= 1 + hRef.intensity * 0.7 * metaC[i];
-
-        positions[ix] = hRef.x + Math.cos(ang) * spray;
-        positions[ix + 1] = hRef.y + Math.sin(ang) * spray * 0.85;
-        positions[ix + 2] = hRef.z + (metaC[i] - 0.5) * 0.6;
-
-        var coreBoost = 1 - metaC[i];
-        alphas[i] = hRef.intensity * (0.25 + coreBoost * 0.7);
-        sizes[i] =
-          (2.0 + coreBoost * 1.6) * (0.85 + hRef.intensity * 0.55);
+        positions[ix + 1] = y;
+        positions[ix + 2] = z;
+        alphas[i] = (0.25 + Math.sin(tt * Math.PI) * 0.55) * metaD[i];
       } else {
-        positions[ix] =
-          metaB[i] + Math.sin(time * 0.1 + metaA[i]) * 0.3 * motionScale;
+        var ang2 = metaB[i] + time * (0.12 + (metaA[i] % 1) * 0.2) * motionScale;
+        var rr = metaC[i] + Math.sin(time * 0.4 + metaA[i]) * 0.2;
+        positions[ix] = Math.cos(ang2) * rr;
         positions[ix + 1] =
-          metaC[i] + Math.cos(time * 0.08 + metaA[i] * 0.7) * 0.22 * motionScale;
-        positions[ix + 2] = metaD[i];
+          metaD[i] + Math.sin(time * 0.5 + metaA[i]) * 0.25;
+        positions[ix + 2] = Math.sin(ang2) * rr * 0.5;
+        alphas[i] = 0.15 + 0.35 * (0.5 + 0.5 * Math.sin(time * 2 + metaA[i]));
       }
     }
 
     posAttr.needsUpdate = true;
     alphaAttr.needsUpdate = true;
-    sizeAttr.needsUpdate = true;
 
-    camera.position.x = mouse.x * 0.3;
-    camera.position.y = mouse.y * 0.18;
-    camera.lookAt(0, 0, 0);
+    camera.position.x = mouse.x * 0.45;
+    camera.position.y = 0.15 + mouse.y * 0.28;
+    camera.lookAt(0, 0.05, 0);
 
     renderer.render(scene, camera);
   }
